@@ -60,7 +60,7 @@ public class Registrations {
         int age = scanner.nextInt();
         
         System.out.print("Email address: ");
-        String email = "'" + scanner.nextLine() + "'";
+        String email = "'" + (new Scanner(System.in).nextLine()) + "'";
         
 		try {
 			stmt = conn.createStatement();
@@ -74,7 +74,7 @@ public class Registrations {
 		      addPerson();
 		} 
 		System.out.println("Person succesfully added!");
-		
+		System.out.println("Press key to continue...");
 		scanner.nextLine();
 	}
 	
@@ -97,7 +97,7 @@ public class Registrations {
 		     removePerson();
 		}
         System.out.println("Person succesfully removed!");
-        
+        System.out.println("Press key to continue...");
         scanner.nextLine();
 	}
 }

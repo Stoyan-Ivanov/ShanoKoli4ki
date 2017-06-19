@@ -22,7 +22,7 @@ public class Menu {
 		clearScreen();
 		
 		System.out.println("Choose from these :");
-		System.out.println("-------------------------\n");
+		System.out.println("------------------\n");
 	    System.out.println("1 - View car garage");
 	    System.out.println("2 - Add a car to the garage");
 	    System.out.println("3 - Remove a car from the garage");

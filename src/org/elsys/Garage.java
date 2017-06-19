@@ -40,6 +40,7 @@ public class Garage {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("Press key to continue...");
 		scanner.nextLine();
 	}
 	
@@ -80,6 +81,7 @@ public class Garage {
 		}	
 		
 		System.out.println("Car succesfully added!");
+		System.out.println("Press key to continue...");
 		scanner.nextLine();
 	}
 	
@@ -105,7 +107,7 @@ public class Garage {
 		     removeCar();
 		}
         System.out.println("Car succesfully removed!");
-        
+        System.out.println("Press key to continue...");
         scanner.nextLine();
 	}
 }
