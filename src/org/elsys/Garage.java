@@ -14,11 +14,11 @@ public class Garage {
 	}
 
 	public void viewAllCars() {
-		Statement stmt;
+		
 		try {
 			stmt = conn.createStatement();
 	
-			String sql = "SELECT idCar, Manufacturer, Model, FuelConsumption, Cost FROM cars.car";
+			String sql = "SELECT Manufacturer, Model, FuelConsumption, Cost FROM cars.car";
 			ResultSet rs = stmt.executeQuery(sql);
 	 
 			while(rs.next()){
@@ -45,7 +45,8 @@ public class Garage {
 	
 	public void addCar () {
 		
-		scanner = new Scanner(System.in);
+		System.out.println("Add a car to the garage");
+		System.out.println("---------------------------");
 		
 		System.out.print("Manufacturer: ");
 		String manufacturer = "'" + scanner.nextLine() + "'";
@@ -98,12 +99,9 @@ public class Garage {
         	stmt.executeUpdate(sql);
         	
         }catch(SQLException se){
-		      se.printStackTrace();
-		      
-		}catch(Exception e){
-		      e.printStackTrace();
-		}	
-		
+        	System.out.println("Erron in SQL! Trying again ...\n");
+		     removeCar();
+		}
         System.out.println("Car succesfully removed!");
 	}
 }
