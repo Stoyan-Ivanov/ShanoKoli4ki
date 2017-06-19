@@ -29,7 +29,7 @@ public class Menu {
 	    System.out.println("4 - View list of people who have a registration");
 	    System.out.println("5 - Add a registration for a person");
 	    System.out.println("6 - Remove a registration");
-	    System.out.println("7 - List of acive rentals");
+	    System.out.println("7 - List of active rentals");
 	    System.out.println("8 - Add a rental");
 	    System.out.println("9 - Remove a renral");
 	        
@@ -40,7 +40,7 @@ public class Menu {
 	    	clearScreen();
 	    
 		    switch(choice) {
-			    case 1: garage.viewAllCars(); break;
+			    case 1: garage.viewAllCars(null); break;
 			    case 2: garage.addCar(); break;
 			    case 3: garage.removeCar(); break;
 			    case 4: reg.viewPeople(); break;

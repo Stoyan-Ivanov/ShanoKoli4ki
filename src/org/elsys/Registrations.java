@@ -40,7 +40,7 @@ public class Registrations {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		System.out.println("Press key to continue...");
 		scanner.nextLine();
 	}
 	
@@ -66,14 +66,17 @@ public class Registrations {
 			stmt = conn.createStatement();
 			
 			String sql = "INSERT INTO cars.people(FirstName, LastName, Age, Email) " +
-					"VALUES (" + firstName + "," + lastName + "," + age + "," + email + ")";
+						 "VALUES (" + firstName + "," + lastName + "," + age + "," + email + ")";
 			stmt.executeUpdate(sql);
 			
 		} catch(SQLException se){
-		      System.out.println("Error in SQL! Trying again ...\n");
-		      addPerson();
+		    System.out.println("Error in SQL! Trying again ...\n");
+		    addPerson();
+		} catch(Exception e){
+			System.out.println("Error! Trying again ...\n");
+		    addPerson();
 		} 
-		System.out.println("Person succesfully added!");
+		System.out.println("Person successfully added!");
 		System.out.println("Press key to continue...");
 		scanner.nextLine();
 	}
@@ -88,15 +91,17 @@ public class Registrations {
         
         try {
         	Statement stmt = conn.createStatement();
-        	String sql = "DELETE FROM cars.people " +
-                     "WHERE Email = " + email; 
+        	String sql = "DELETE FROM cars.people WHERE Email = " + email; 
         	stmt.executeUpdate(sql);
         	
-        }catch(SQLException se){
+        } catch(SQLException se){
         	System.out.println("Erron in SQL! Trying again ...\n");
 		     removePerson();
-		}
-        System.out.println("Person succesfully removed!");
+		} catch(Exception e){
+			System.out.println("Error! Trying again ...\n");
+		    removePerson();
+		} 
+        System.out.println("Person successfully removed!");
         System.out.println("Press key to continue...");
         scanner.nextLine();
 	}

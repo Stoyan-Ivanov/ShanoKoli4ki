@@ -67,14 +67,14 @@ public class MainClass {
 		
 		try {
 			Connection connection = DriverManager.getConnection(connectionURL, properties);
-			System.out.println("Connected to " + connectionURL +" successfully...");
+			System.out.println("Connected to " + connectionURL + " successfully...");
 			
 			new Menu(connection);
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Connection unsuccessful, try again...");
+			main(null);
 		}
 		
 	}
-
 }
