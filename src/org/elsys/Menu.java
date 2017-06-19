@@ -31,11 +31,11 @@ public class Menu {
 	    	int choice = scanner.nextInt();
 	    
 		    switch(choice) {
-			    case 1: garage.viewAllCars(); break;
+			    case 1: clearScreen(); garage.viewAllCars(); displayMenu();break;
 			    case 2: break;
 			    case 3: break;
-			    case 4: clearScreen(); garage.addCar(); break;
-			    case 5: clearScreen(); garage.removeCar(); break;
+			    case 4: clearScreen(); garage.addCar(); displayMenu(); break;
+			    case 5: clearScreen(); garage.removeCar(); displayMenu(); break;
 			    default: 
 			    	System.out.println("Wrong input!");
 			    	clearScreen();
