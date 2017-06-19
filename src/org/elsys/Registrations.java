@@ -41,6 +41,8 @@ public class Registrations {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		scanner.nextLine();
 	}
 	
 	
@@ -64,15 +66,17 @@ public class Registrations {
 		try {
 			stmt = conn.createStatement();
 			
-			String sql = "INSERT INTO cars.(FirstName, LastName, Age, Email) " +
+			String sql = "INSERT INTO cars.people(FirstName, LastName, Age, Email) " +
 					"VALUES (" + firstName + "," + lastName + "," + age + "," + email +")";
 			stmt.executeUpdate(sql);
 			
 		} catch(SQLException se){
-		      System.out.println("Erron in SQL! Trying again ...\n");
+		      System.out.println("Error in SQL! Trying again ...\n");
 		      addPerson();
 		} 
 		System.out.println("Person succesfully added!");
+		
+		scanner.nextLine();
 	}
 	
 	public void removePerson() {
@@ -94,5 +98,7 @@ public class Registrations {
 		     removePerson();
 		}
         System.out.println("Person succesfully removed!");
+        
+        scanner.nextLine();
 	}
 }
