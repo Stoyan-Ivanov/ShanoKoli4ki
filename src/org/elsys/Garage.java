@@ -7,7 +7,7 @@ public class Garage {
 	
 	private Statement stmt = null;
 	private static Connection conn = null;
-	private Scanner scanner;
+	private Scanner scanner = new Scanner(System.in);
 	
 	public Garage(Connection conn) {
 		Garage.conn = conn;
@@ -78,5 +78,32 @@ public class Garage {
 		}	
 		
 		System.out.println("Car succesfully added!");
+	}
+	
+	public void removeCar() {
+		
+		System.out.println("Remove a car from garage");
+		System.out.println("---------------------------");
+		
+		System.out.print("Manufacturer: ");
+		String manufacturer = "'" + scanner.nextLine() + "'";
+		
+        System.out.print("Model: ");
+        String model = "'" + scanner.nextLine() + "'";
+        
+        try {
+        	Statement stmt = conn.createStatement();
+        	String sql = "DELETE FROM cars.car " +
+                     "WHERE Manufacturer = " + manufacturer + " AND " + "Model = " + model;
+        	stmt.executeUpdate(sql);
+        	
+        }catch(SQLException se){
+		      se.printStackTrace();
+		      
+		}catch(Exception e){
+		      e.printStackTrace();
+		}	
+		
+        System.out.println("Car succesfully removed!");
 	}
 }

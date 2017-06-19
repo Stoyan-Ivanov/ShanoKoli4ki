@@ -18,7 +18,7 @@ public class Menu {
 		Garage garage = new Garage(conn);
 		clearScreen();
 		
-		System.out.println("Choose from these :\n");
+		System.out.println("Choose from these :");
 		System.out.println("-------------------------\n");
 	    System.out.println("1 - View car garage");
 	    System.out.println("2 - Rent a car");
@@ -34,8 +34,8 @@ public class Menu {
 			    case 1: garage.viewAllCars(); break;
 			    case 2: break;
 			    case 3: break;
-			    case 4:  garage.addCar(); break;
-			    case 5: break;
+			    case 4: clearScreen(); garage.addCar(); break;
+			    case 5: clearScreen(); garage.removeCar(); break;
 			    default: 
 			    	System.out.println("Wrong input!");
 			    	clearScreen();
