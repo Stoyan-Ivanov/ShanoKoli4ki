@@ -5,8 +5,8 @@ import java.util.Scanner;
 
 public class Garage {
 	
-	private Statement stmt = null;
-	private static Connection conn = null;
+	private Statement stmt;
+	private static Connection conn;
 	private Scanner scanner = new Scanner(System.in);
 	
 	public Garage(Connection conn) {

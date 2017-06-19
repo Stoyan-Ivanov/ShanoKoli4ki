@@ -10,9 +10,9 @@ import java.util.Properties;
 
 public class MainClass {
 	
-	private static BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+	private BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 	
-	public static String getConnectionInformation() {
+	public String getConnectionInformation() {
 		
 		String connectionURL = "jdbc:mysql://localhost:3306/cars";
 //		String line;
@@ -36,7 +36,7 @@ public class MainClass {
 		
 	}
 	
-	public static Properties getProperties() {
+	public Properties getProperties() {
 
 		Properties properties = new Properties();
 		String line;
@@ -59,9 +59,11 @@ public class MainClass {
 
 	public static void main(String[] args) {
 		
-		String connectionURL = getConnectionInformation();
+		MainClass sqlConnection = new MainClass();
 		
-		Properties properties = getProperties();
+		String connectionURL = sqlConnection.getConnectionInformation();
+		
+		Properties properties = sqlConnection.getProperties();
 		
 		try {
 			Connection connection = DriverManager.getConnection(connectionURL, properties);

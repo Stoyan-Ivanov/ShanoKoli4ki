@@ -5,15 +5,14 @@ import java.util.Scanner;
 
 public class Registrations {
 	
-	private Statement stmt = null;
-	private static Connection conn = null;
+	private Statement stmt;
+	private static Connection conn;
 	private Scanner scanner = new Scanner(System.in);
 
 
 	public Registrations(Connection conn) {
 		this.conn = conn;
 	}
-
 
 	public void viewPeople() {
 		try {
@@ -62,12 +61,12 @@ public class Registrations {
         
         System.out.print("Email address: ");
         String email = "'" + scanner.nextLine() + "'";
-		
+        
 		try {
 			stmt = conn.createStatement();
 			
 			String sql = "INSERT INTO cars.people(FirstName, LastName, Age, Email) " +
-					"VALUES (" + firstName + "," + lastName + "," + age + "," + email +")";
+					"VALUES (" + firstName + "," + lastName + "," + age + "," + email + ")";
 			stmt.executeUpdate(sql);
 			
 		} catch(SQLException se){
@@ -89,7 +88,7 @@ public class Registrations {
         
         try {
         	Statement stmt = conn.createStatement();
-        	String sql = "DELETE FROM cars.car " +
+        	String sql = "DELETE FROM cars.people " +
                      "WHERE Email = " + email; 
         	stmt.executeUpdate(sql);
         	

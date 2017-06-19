@@ -8,8 +8,8 @@ import java.util.Scanner;
 
 public class Rentals {
 	
-	private Statement stmt = null;
-	private static Connection conn = null;
+	private Statement stmt;
+	private static Connection conn;
 	private Scanner scanner = new Scanner(System.in);
 
 

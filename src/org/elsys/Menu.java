@@ -6,7 +6,7 @@ import java.sql.*;
 
 public class Menu {
 	
-	public Connection conn;
+	private Connection conn;
 	private Scanner scanner = new Scanner(System.in);
 	private int choice;
 
@@ -36,17 +36,19 @@ public class Menu {
 	    while (true) {
 	    	
 	    	choice = scanner.nextInt();
+	    	
+	    	clearScreen();
 	    
 		    switch(choice) {
-			    case 1: clearScreen(); garage.viewAllCars(); break;
-			    case 2:	clearScreen(); garage.addCar(); break;
-			    case 3: clearScreen(); garage.removeCar(); break;
-			    case 4: clearScreen(); reg.viewPeople(); break;
-			    case 5: clearScreen(); reg.addPerson(); break;
-			    case 6: clearScreen(); reg.removePerson(); break;
-			    case 7:	clearScreen(); rent.viewRentals(); break;
-			    case 8: clearScreen(); rent.addRental(); break;
-			    case 9:	clearScreen(); rent.removeRental(); break;
+			    case 1: garage.viewAllCars(); break;
+			    case 2: garage.addCar(); break;
+			    case 3: garage.removeCar(); break;
+			    case 4: reg.viewPeople(); break;
+			    case 5: reg.addPerson(); break;
+			    case 6: reg.removePerson(); break;
+			    case 7:	rent.viewRentals(); break;
+			    case 8: rent.addRental(); break;
+			    case 9:	rent.removeRental(); break;
 			    default: 
 			    	System.out.println("Wrong input!");
 			    	clearScreen();
@@ -58,7 +60,7 @@ public class Menu {
 	}
 	
 	static void clearScreen() {
-		for (int i = 0; i < 10; ++i) {
+		for (int i = 0; i < 10; i++) {
 			System.out.println();
 		}
 	}
