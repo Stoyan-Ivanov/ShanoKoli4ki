@@ -1,7 +1,5 @@
 package org.elsys;
 
-import java.sql.*;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,23 +14,23 @@ public class MainClass {
 	
 	public static String getConnectionInformation() {
 		
-		String connectionURL = "jdbc:mysql://";
-		String line;
+		String connectionURL = "jdbc:mysql://localhost:3306/cars";
+//		String line;
 		
-		try {
-			System.out.print("Welcome to the JDBC & MYSQL console application" +
-							 "\nEnter the host : ");
-			line = input.readLine();
-			connectionURL += line + ":";
-			System.out.print("Enter the port : ");
-			line = input.readLine();
-			connectionURL += line + "/";
-			System.out.print("Enter database name : ");
-			line = input.readLine();
-			connectionURL += line;
-		} catch (IOException e1) {
-			e1.printStackTrace();	
-		}
+//		try {
+//			System.out.print("Welcome to the JDBC & MYSQL console application" +
+//							 "\nEnter the host : ");
+//			line = input.readLine();
+//			connectionURL += line + ":";
+//			System.out.print("Enter the port : ");
+//			line = input.readLine();
+//			connectionURL += line + "/";
+//			System.out.print("Enter database name : ");
+//			line = input.readLine();
+//			connectionURL += line;
+//		} catch (IOException e1) {
+//			e1.printStackTrace();	
+//		}
 		
 		return connectionURL;
 		
@@ -69,8 +67,7 @@ public class MainClass {
 			Connection connection = DriverManager.getConnection(connectionURL, properties);
 			System.out.println("Connected to " + connectionURL +" successfully...");
 			
-			Menu menu = new Menu(connection);
-			
+			new Menu(connection);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

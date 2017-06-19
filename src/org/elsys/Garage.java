@@ -4,7 +4,9 @@ import java.sql.*;
 import java.util.Scanner;
 
 public class Garage {
-	static Connection conn = null;
+	
+	private Statement stmt = null;
+	private static Connection conn = null;
 	private Scanner scanner;
 	
 	public Garage(Connection conn) {
@@ -20,7 +22,6 @@ public class Garage {
 			ResultSet rs = stmt.executeQuery(sql);
 	 
 			while(rs.next()){
-				int id = rs.getInt("idCar");
 				String manufacturer = rs.getString("Manufacturer");
 				String model = rs.getString("Model");
 		        float fuelConsump = rs.getFloat("FuelConsumption");
@@ -28,7 +29,6 @@ public class Garage {
 	
 		         //Display values
 		         System.out.println("---------------------------");
-		         System.out.println("CarId: " + id);
 		         System.out.println("Manufacturer: " + manufacturer);
 		         System.out.println("Model: " + model);
 		         System.out.println("Fuel Consumption: " + fuelConsump);
@@ -62,8 +62,6 @@ public class Garage {
         System.out.print("Number of doors: ");
         int doors = scanner.nextInt();
 		
-		Statement stmt = null;
-		
 		try {
 			
 			stmt = conn.createStatement();
@@ -72,13 +70,13 @@ public class Garage {
 					"VALUES (" + manufacturer + "," + model + "," + fuelConsum + "," + cost + "," + doors + ")";
 			stmt.executeUpdate(sql);
 			
-		}catch(SQLException se){
+		} catch(SQLException se){
 		      se.printStackTrace();
 		      
-		}catch(Exception e){
+		} catch(Exception e){
 		      e.printStackTrace();
 		}	
 		
-		 System.out.println("Car succesfully added!");
+		System.out.println("Car succesfully added!");
 	}
 }
