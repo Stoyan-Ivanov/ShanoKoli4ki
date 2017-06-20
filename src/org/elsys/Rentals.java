@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
+
 public class Rentals {
 	
 	private Statement stmt;
@@ -19,7 +20,49 @@ public class Rentals {
 
 
 	public void viewRentals() {
-		
+		try {
+			System.out.println("----- All rentals -----\n");
+			
+			stmt = conn.createStatement();
+			
+			String sql = "Select p.FirstName, p.LastName,"
+					+ "p.Age, p.Email, c.RegistrationPlate, c.Manufacturer, c.Model, c.FuelConsumption, "
+					+ "c.Colour, c.DoorCount, c.YearOfRelease, c.Cost, r.FromDate, r. ToDate"
+					+ " FROM shanokoli4ki.people p "
+					+ "INNER JOIN shanokoli4ki.rents r ON p.Email = r.Email "
+					+ "INNER JOIN shanokoli4ki.car c ON c.RegistrationPlate = r.RegistrationPlate";
+			
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next()){
+				
+		        System.out.println("---------------------------");
+		        System.out.println("First Name: " + rs.getString("FirstName"));
+		        System.out.println("Last Name: " + rs.getString("LastName"));
+		        System.out.println("Email: " + rs.getString("Email"));
+		        System.out.println("Age: " + rs.getString("Age"));
+		        System.out.println("***************************");
+		        System.out.println("Registration plate: " + rs.getString("RegistrationPlate"));
+		        System.out.println("Manufacturer: " + rs.getString("Manufacturer"));
+		        System.out.println("Model: " + rs.getString("Model"));
+		        System.out.println("Year of release: " + rs.getInt("YearOfRelease"));
+		        System.out.println("Colour: " + rs.getString("Colour"));
+		        System.out.println("Number of Doors: " + rs.getInt("DoorCount"));
+		        System.out.println("Fuel Consumption: " + rs.getFloat("FuelConsumption"));
+		        System.out.println("Rent for a day: " + rs.getInt("Cost"));
+		        System.out.println("***************************");
+		        System.out.println("From Date: " + rs.getString("FromDate"));
+		        System.out.println("To Date: " + rs.getString("ToDate") + "\n");
+		        
+		      }
+			rs.close();
+			
+			System.out.println("Press Enter to continue...");
+	        scanner.nextLine();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
@@ -38,7 +81,6 @@ public class Rentals {
 			String sql = "SELECT * FROM shanokoli4ki.people WHERE Email = " + email;
 			
 			ResultSet result = stmt.executeQuery(sql);
-			System.out.println(result);
 			
 			if(!result.next()) {
 				System.out.println("\n Please make sure that you have made an account! \n");
@@ -80,10 +122,8 @@ public class Rentals {
 					
 					
 					result = stmt.executeQuery(sql);
-					System.out.println("tuka vliza");
 					
 					if(!result.next()) {
-						System.out.println("tuka syshto vliza");
 						stmt = conn.createStatement();
 						
 						sql = "INSERT INTO shanokoli4ki.rents (RegistrationPlate, Email, FromDate, ToDate) VALUES(" + regPlate + " ," 
