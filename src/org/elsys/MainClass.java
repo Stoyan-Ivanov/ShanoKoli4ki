@@ -15,7 +15,7 @@ public class MainClass {
 	
 	public String getConnectionInformation() {
 		
-		String connectionURL = "jdbc:mysql://localhost:3306/cars";
+		String connectionURL = "jdbc:mysql://localhost:3306/";
 //		String line;
 		
 //		try {
@@ -57,27 +57,18 @@ public class MainClass {
 	
 		return properties;
 	}
-
-	public static void main(String[] args) {
+	
+	private void createDatabaseStructure(Connection connection) throws Exception {
+		Statement stmt = connection.createStatement();
+	      
+	    String sql = "CREATE DATABASE IF NOT EXISTS cars";
+	    stmt.executeUpdate(sql);
 		
-		MainClass sqlConnection = new MainClass();
+		stmt = connection.createStatement();
 		
-		String connectionURL = sqlConnection.getConnectionInformation();
 		
-		Properties properties = sqlConnection.getProperties();
 		
-		try {
-			Connection connection = DriverManager.getConnection(connectionURL, properties);
-			System.out.println("Connected to " + connectionURL + " successfully...");
-			
-			Statement stmt = connection.createStatement();
-		      
-		    String sql = "CREATE DATABASE cars";
-		    stmt.executeUpdate(sql);
-			
-			stmt = connection.createStatement();
-			
-			sql = "CREATE TABLE IF NOT EXISTS cars.car (" +
+		sql = "CREATE TABLE IF NOT EXISTS cars.car (" +
 				  "RegistrationPlate VARCHAR(45) NOT NULL UNIQUE, " +
 				  "Manufacturer VARCHAR(45) NOT NULL," +
 				  "Model VARCHAR(45) NOT NULL, " +
@@ -122,13 +113,32 @@ public class MainClass {
 				    "ON UPDATE NO ACTION)" ;
 			
 			stmt.executeUpdate(sql);
+	}
+
+	public static void main(String[] args) {
+		
+		MainClass sqlConnection = new MainClass();
+	
+		
+		String connectionURL = sqlConnection.getConnectionInformation();
+		
+		Properties properties = sqlConnection.getProperties();
+		
+		try {
+			
+			Connection connection = DriverManager.getConnection(connectionURL, properties);
+			
+			sqlConnection.createDatabaseStructure(connection);
+			
+			System.out.println("Connected to " + connectionURL + " successfully...");
 			
 			new Menu(connection);
 			
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			System.out.println("Connection unsuccessful, try again...");
 			main(null);
 		}
 		
 	}
+	
 }
