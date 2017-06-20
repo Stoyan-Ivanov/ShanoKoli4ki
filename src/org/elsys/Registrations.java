@@ -9,7 +9,6 @@ public class Registrations {
 	private static Connection conn;
 	private Scanner scanner = new Scanner(System.in);
 
-
 	public Registrations(Connection conn) {
 		this.conn = conn;
 	}
@@ -22,17 +21,12 @@ public class Registrations {
 			ResultSet rs = stmt.executeQuery(sql);
 	 
 			while(rs.next()){
-				String firstName = rs.getString("FirstName");
-				String lastName = rs.getString("LastName");
-		        int age = rs.getInt("Age");
-		        String email = rs.getString("Email");
-	
-		         //Display values
+				
 		         System.out.println("---------------------------");
-		         System.out.println("FirstName: " + firstName);
-		         System.out.println("LastName: " + lastName);
-		         System.out.println("Age: " + age);
-		         System.out.println("Email address: " + email + "\n");
+		         System.out.println("FirstName: " + rs.getString("FirstName"));
+		         System.out.println("LastName: " + rs.getString("LastName"));
+		         System.out.println("Age: " + rs.getInt("Age"));
+		         System.out.println("Email address: " + rs.getString("Email") + "\n");
 		      }
 			rs.close();
 	      
@@ -40,7 +34,7 @@ public class Registrations {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("Press key to continue...");
+		System.out.println("Press Enter to continue...");
 		scanner.nextLine();
 	}
 	
@@ -48,7 +42,7 @@ public class Registrations {
 	public void addPerson () {
 		
 		System.out.println("Add a person");
-		System.out.println("---------------------------");
+		System.out.println("-----------------");
 		
 		System.out.print("First name: ");
 		String firstName = "'" + scanner.nextLine() + "'";
@@ -77,7 +71,7 @@ public class Registrations {
 		    addPerson();
 		} 
 		System.out.println("Person successfully added!");
-		System.out.println("Press key to continue...");
+		System.out.println("Press Enter to continue...");
 		scanner.nextLine();
 	}
 	
@@ -102,7 +96,7 @@ public class Registrations {
 		    removePerson();
 		} 
         System.out.println("Person successfully removed!");
-        System.out.println("Press key to continue...");
+        System.out.println("Press Enter to continue...");
         scanner.nextLine();
 	}
 }

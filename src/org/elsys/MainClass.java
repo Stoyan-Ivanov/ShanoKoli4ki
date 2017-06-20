@@ -15,9 +15,10 @@ public class MainClass {
 		
 		System.out.println("Welcome to ShanoKoli4ki & Co.\n"
 				+ "Log in the database and we will setup everything for you!\n"
-				+ "If you want to exit just type 'Exit' .");
+				+ "If you want to proceed please press Enter\n"
+				+ "or if you want to exit just type 'Exit'.");
 		
-		while(a.nextLine() != "Exit") {
+		while(!a.nextLine().equals("Exit")) {
 			try {
 				connectionURL = sqlConnection.getURLDetails();
 				connection = DriverManager.getConnection(connectionURL);
@@ -33,7 +34,6 @@ public class MainClass {
 				sqlConnection.setFirstLogin(true);
 			}
 		}
-		
 		System.out.println("Thanks for using our application.");
 	}
 }

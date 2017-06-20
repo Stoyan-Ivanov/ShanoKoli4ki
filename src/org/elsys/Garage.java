@@ -28,22 +28,15 @@ public class Garage {
 			ResultSet rs = stmt.executeQuery(sql);
 	 
 			while(rs.next()){
-				String registrationPlate = rs.getString("RegistrationPlate");
-				String manufacturer = rs.getString("Manufacturer");
-				String model = rs.getString("Model");
-				int yearOfRelease = rs.getInt("YearOfRelease");
-				String colour = rs.getString("Colour");
-		        float fuelConsump = rs.getFloat("FuelConsumption");
-		        int cost = rs.getInt("Cost");
 	
 		        System.out.println("---------------------------");
-		        System.out.println("Registration plate: " + registrationPlate);
-		        System.out.println("Manufacturer: " + manufacturer);
-		        System.out.println("Model: " + model);
-		        System.out.println("Year of release: " + yearOfRelease);
-		        System.out.println("Colour: " + colour);
-		        System.out.println("Fuel Consumption: " + fuelConsump);
-		        System.out.println("Rent for a day: " + cost + "\n");
+		        System.out.println("Registration plate: " + rs.getString("RegistrationPlate"));
+		        System.out.println("Manufacturer: " + rs.getString("Manufacturer"));
+		        System.out.println("Model: " + rs.getString("Model"));
+		        System.out.println("Year of release: " + rs.getInt("YearOfRelease"));
+		        System.out.println("Colour: " + rs.getString("Colour"));
+		        System.out.println("Fuel Consumption: " + rs.getFloat("FuelConsumption"));
+		        System.out.println("Rent for a day: " + rs.getInt("Cost") + "\n");
 		      }
 			rs.close();
 	      
@@ -51,7 +44,7 @@ public class Garage {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("Press key to continue...");
+		System.out.println("Press Enter to continue...");
 		scanner.nextLine();
 	}
 	
@@ -103,9 +96,8 @@ public class Garage {
 			System.out.println("Error! Trying again ...\n");
 		    addCar();
 		}
-		
 		System.out.println("Car successfully added!");
-		System.out.println("Press key to continue...");
+		System.out.println("Press Enter to continue...");
 		scanner.nextLine();
 	}
 	
@@ -132,7 +124,7 @@ public class Garage {
 		}
         
         System.out.println("Car successfully removed!");
-        System.out.println("Press key to continue...");
+        System.out.println("Press Enter to continue...");
         scanner.nextLine();
 	}
 }
