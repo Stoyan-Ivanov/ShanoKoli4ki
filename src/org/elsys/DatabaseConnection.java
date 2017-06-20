@@ -60,15 +60,11 @@ public class DatabaseConnection {
 			
 			Statement stmt = connection.createStatement();
 			
-			String sql = "DROP DATABASE IF EXISTS cars";
-			
-			stmt.executeUpdate(sql);
-			
-		    sql = "CREATE DATABASE IF NOT EXISTS cars";
+		    String sql = "CREATE DATABASE IF NOT EXISTS cars";
 		    
 		    stmt.executeUpdate(sql);
 		    
-			sql = "CREATE TABLE `cars`.`car` ("
+			sql = "CREATE TABLE IF NOT EXISTS`cars`.`car` ("
 					+ "`RegistrationPlate` VARCHAR(45) NOT NULL UNIQUE,"
 					+ "`Manufacturer` VARCHAR(45) NOT NULL,"
 					+ "`Model` VARCHAR(45) NOT NULL,"
@@ -80,7 +76,7 @@ public class DatabaseConnection {
 					+ "PRIMARY KEY (`RegistrationPlate`))";
 			stmt.executeUpdate(sql);
 				
-			sql ="CREATE TABLE `cars`.`people` ("
+			sql ="CREATE TABLE IF NOT EXISTS `cars`.`people` ("
 					+ "`FirstName` VARCHAR(45) NOT NULL,"
 					+ "`LastName` VARCHAR(45) NOT NULL,"
 					+ "`Age` INT NOT NULL,"
@@ -89,7 +85,7 @@ public class DatabaseConnection {
 				
 			stmt.executeUpdate(sql);
 				
-			sql = "CREATE TABLE `cars`.`rents` ("
+			sql = "CREATE TABLE IF NOT EXISTS `cars`.`rents` ("
 					+ "`idRents` INT NOT NULL AUTO_INCREMENT,"
 					+ "`RegistrationPlate` VARCHAR(45) NOT NULL,"
 					+ "`Email` VARCHAR(45) NOT NULL,"
