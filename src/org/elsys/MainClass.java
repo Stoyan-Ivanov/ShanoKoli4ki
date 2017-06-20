@@ -33,6 +33,7 @@ public class MainClass {
 				
 				new Menu(connection);
 			} catch (Exception e) {
+				
 				System.out.println("Connection unsuccessful, try again...");
 				sqlConnection.setFirstLogin(true);
 			}
