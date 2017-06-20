@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 public class MainClass {
@@ -68,6 +69,59 @@ public class MainClass {
 		try {
 			Connection connection = DriverManager.getConnection(connectionURL, properties);
 			System.out.println("Connected to " + connectionURL + " successfully...");
+			
+			Statement stmt = connection.createStatement();
+		      
+		    String sql = "CREATE DATABASE cars";
+		    stmt.executeUpdate(sql);
+			
+			stmt = connection.createStatement();
+			
+			sql = "CREATE TABLE IF NOT EXISTS cars.car (" +
+				  "RegistrationPlate VARCHAR(45) NOT NULL UNIQUE, " +
+				  "Manufacturer VARCHAR(45) NOT NULL," +
+				  "Model VARCHAR(45) NOT NULL, " +
+				  "Cost INT NOT NULL, " +
+				  "FuelConsumption` DECIMAL(4,2) NOT NULL, " +
+				  "DoorCount` INT NOT NULL, " +
+				  "Colour` VARCHAR(45) NOT NULL, "+
+				  "YearOfRelease` INT NOT NULL, " +
+				  "PRIMARY KEY (`RegistrationPlate`))";
+			 
+			stmt.executeUpdate(sql);
+			
+			stmt = connection.createStatement();
+			
+			sql = "CREATE TABLE IF NOT EXISTS cars.people (" +
+				  "FirstName VARCHAR(45) NOT NULL, " +
+				  "LastName VARCHAR(45) NOT NULL, " +
+				  "Age INT NOT NULL, " +
+				  "Email VARCHAR(45) NOT NULL UNIQUE, " +
+				   "PRIMARY KEY (`Email`))";
+			
+			stmt.executeUpdate(sql);
+			
+			stmt = connection.createStatement();
+			
+			sql = "CREATE TABLE IF NOT EXISTS cars.rents (" +
+					"idRents INT NOT NULL AUTO_INCREMENT, " +
+				  	"RegistrationPlate VARCHAR(45) NOT NULL, " +
+				  	"Email VARCHAR(45) NOT NULL, " +
+				  	"From DATETIME NOT NULL, " +
+				  	"To DATETIME NOT NULL, " + 
+				  	"PRIMARY KEY (`idRents`), " +
+				  	"CONSTRAINT `RegistrationPlate` " +
+				    "FOREIGN KEY (`RegistrationPlate`) " +
+				    "REFERENCES `cars`.`car` (`RegistrationPlate`) " +
+				    "ON DELETE NO ACTION " +
+				    "ON UPDATE NO ACTION, " +
+				    "CONSTRAINT `Email` " +
+				    "FOREIGN KEY (`Email`) " +
+				    "REFERENCES `cars`.`people` (`Email`) " +
+				    "ON DELETE NO ACTION " +
+				    "ON UPDATE NO ACTION)" ;
+			
+			stmt.executeUpdate(sql);
 			
 			new Menu(connection);
 			
