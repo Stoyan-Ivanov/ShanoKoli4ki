@@ -17,7 +17,7 @@ public class Registrations {
 		try {
 			stmt = conn.createStatement();
 	
-			String sql = "SELECT FirstName, LastName, Age, Email FROM cars.people";
+			String sql = "SELECT FirstName, LastName, Age, Email FROM shanokoli4ki.people";
 			ResultSet rs = stmt.executeQuery(sql);
 	 
 			while(rs.next()){
@@ -59,7 +59,7 @@ public class Registrations {
 		try {
 			stmt = conn.createStatement();
 			
-			String sql = "INSERT INTO cars.people(FirstName, LastName, Age, Email) " +
+			String sql = "INSERT INTO shanokoli4ki.people(FirstName, LastName, Age, Email) " +
 						 "VALUES (" + firstName + "," + lastName + "," + age + "," + email + ")";
 			stmt.executeUpdate(sql);
 			
@@ -85,7 +85,7 @@ public class Registrations {
         
         try {
         	Statement stmt = conn.createStatement();
-        	String sql = "DELETE FROM cars.people WHERE Email = " + email; 
+        	String sql = "DELETE FROM shanokoli4ki.people WHERE Email = " + email; 
         	stmt.executeUpdate(sql);
         	
         } catch(SQLException se){

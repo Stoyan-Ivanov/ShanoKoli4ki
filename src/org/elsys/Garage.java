@@ -20,9 +20,9 @@ public class Garage {
 	
 			String sql = (regPlate == null) ? 
 						"SELECT RegistrationPlate, Manufacturer, Model, YearOfRelease, "
-						+ "Colour, FuelConsumption, Cost FROM cars.car"
+						+ "Colour, FuelConsumption, Cost FROM shanokoli4ki.car"
 						: "SELECT RegistrationPlate, Manufacturer, Model, YearOfRelease, "
-						+ "Colour, FuelConsumption, Cost FROM cars.car"
+						+ "Colour, FuelConsumption, Cost FROM shanokoli4ki.car"
 						+ " WHERE RegistrationPlate = " + regPlate;
 			
 			ResultSet rs = stmt.executeQuery(sql);
@@ -81,10 +81,10 @@ public class Garage {
 	        int doors = scanner.nextInt();
 			stmt = conn.createStatement();
 				
-			String sql = "INSERT INTO cars.car(RegistrationPlate, Manufacturer, "
+			String sql = "INSERT INTO shanokoli4ki.car(RegistrationPlate, Manufacturer, "
 												+ "Model, YearOfRelease, Colour, FuelConsumption,"
-												+ " Cost, DoorCount) " +
-												"VALUES (" + registrationPlate + "," + manufacturer + ","
+												+ " Cost, DoorCount) " 
+												+ "VALUES (" + registrationPlate + "," + manufacturer + ","
 												+ model + "," + yearOfRelease + "," + colour + "," + fuelConsum + "," 
 												+ cost + "," + doors + ")";
 			stmt.executeUpdate(sql);
@@ -111,7 +111,7 @@ public class Garage {
 
         try {
         	Statement stmt = conn.createStatement();
-        	String sql = "DELETE FROM cars.car " +
+        	String sql = "DELETE FROM shanokoli4ki.car " +
                      "WHERE RegistrationPlate = " + registrationPlate;
         	stmt.executeUpdate(sql);
         	
