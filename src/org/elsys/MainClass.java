@@ -1,144 +1,39 @@
 package org.elsys;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Properties;
+import java.util.Scanner;
+
 
 public class MainClass {
 	
-	private BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-	
-	public String getConnectionInformation() {
-		
-		String connectionURL = "jdbc:mysql://localhost:3306/";
-//		String line;
-		
-//		try {
-//			System.out.print("Welcome to the JDBC & MYSQL console application" +
-//							 "\nEnter the host : ");
-//			line = input.readLine();
-//			connectionURL += line + ":";
-//			System.out.print("Enter the port : ");
-//			line = input.readLine();
-//			connectionURL += line + "/";
-//			System.out.print("Enter database name : ");
-//			line = input.readLine();
-//			connectionURL += line;
-//		} catch (IOException e1) {
-//			e1.printStackTrace();	
-//		}
-		
-		return connectionURL;
-		
-	}
-	
-	public Properties getProperties() {
-
-		Properties properties = new Properties();
-		String line;
-		
-		try {
-			System.out.print("Enter username : ");
-			line = input.readLine();
-			properties.setProperty("user", line);
-			System.out.print("Enter password : ");
-			line = input.readLine();
-			properties.setProperty("password", line);
-			properties.setProperty("useSSL", "false");
-			properties.setProperty("autoReconnect", "true");
-		} catch (IOException e1) {
-			e1.printStackTrace();	
-		}
-	
-		return properties;
-	}
-	
-	private void createDatabaseStructure(Connection connection) throws Exception {
-		Statement stmt = connection.createStatement();
-	      
-	    String sql = "CREATE DATABASE IF NOT EXISTS cars";
-	    stmt.executeUpdate(sql);
-		
-		stmt = connection.createStatement();
-		
-		
-		
-		sql = "CREATE TABLE IF NOT EXISTS cars.car (" +
-				  "RegistrationPlate VARCHAR(45) NOT NULL UNIQUE, " +
-				  "Manufacturer VARCHAR(45) NOT NULL," +
-				  "Model VARCHAR(45) NOT NULL, " +
-				  "Cost INT NOT NULL, " +
-				  "FuelConsumption` DECIMAL(4,2) NOT NULL, " +
-				  "DoorCount` INT NOT NULL, " +
-				  "Colour` VARCHAR(45) NOT NULL, "+
-				  "YearOfRelease` INT NOT NULL, " +
-				  "PRIMARY KEY (`RegistrationPlate`))";
-			 
-			stmt.executeUpdate(sql);
-			
-			stmt = connection.createStatement();
-			
-			sql = "CREATE TABLE IF NOT EXISTS cars.people (" +
-				  "FirstName VARCHAR(45) NOT NULL, " +
-				  "LastName VARCHAR(45) NOT NULL, " +
-				  "Age INT NOT NULL, " +
-				  "Email VARCHAR(45) NOT NULL UNIQUE, " +
-				   "PRIMARY KEY (`Email`))";
-			
-			stmt.executeUpdate(sql);
-			
-			stmt = connection.createStatement();
-			
-			sql = "CREATE TABLE IF NOT EXISTS cars.rents (" +
-					"idRents INT NOT NULL AUTO_INCREMENT, " +
-				  	"RegistrationPlate VARCHAR(45) NOT NULL, " +
-				  	"Email VARCHAR(45) NOT NULL, " +
-				  	"From DATETIME NOT NULL, " +
-				  	"To DATETIME NOT NULL, " + 
-				  	"PRIMARY KEY (`idRents`), " +
-				  	"CONSTRAINT `RegistrationPlate` " +
-				    "FOREIGN KEY (`RegistrationPlate`) " +
-				    "REFERENCES `cars`.`car` (`RegistrationPlate`) " +
-				    "ON DELETE NO ACTION " +
-				    "ON UPDATE NO ACTION, " +
-				    "CONSTRAINT `Email` " +
-				    "FOREIGN KEY (`Email`) " +
-				    "REFERENCES `cars`.`people` (`Email`) " +
-				    "ON DELETE NO ACTION " +
-				    "ON UPDATE NO ACTION)" ;
-			
-			stmt.executeUpdate(sql);
-	}
-
 	public static void main(String[] args) {
 		
-		MainClass sqlConnection = new MainClass();
-	
+		DatabaseConnection sqlConnection = new DatabaseConnection();
+		String connectionURL;
+		Connection connection;
+		Scanner a = new Scanner(System.in);
 		
-		String connectionURL = sqlConnection.getConnectionInformation();
+		System.out.println("Welcome to ShanoKoli4ki & Co.\n"
+				+ "Log in the database and we will setup everything for you!\n"
+				+ "If you want to exit just type 'Exit' .");
 		
-		Properties properties = sqlConnection.getProperties();
-		
-		try {
-			
-			Connection connection = DriverManager.getConnection(connectionURL, properties);
-			
-			sqlConnection.createDatabaseStructure(connection);
-			
-			System.out.println("Connected to " + connectionURL + " successfully...");
-			
-			new Menu(connection);
-			
-		} catch (Exception e) {
-			System.out.println("Connection unsuccessful, try again...");
-			main(null);
+		while(a.nextLine() != "Exit") {
+			try {
+				connectionURL = sqlConnection.getURLDetails();
+				connection = DriverManager.getConnection(connectionURL);
+				System.out.println("Connection successful!");
+				sqlConnection.createDatabaseStructure(connection);
+				System.out.println("Database structure added!\n"
+									+ "Loging into the new database...");
+				connection = DriverManager.getConnection(connectionURL);
+				System.out.println("Connected to the new database successfully!");
+				new Menu(connection);
+			} catch (Exception e) {
+				System.out.println("Connection unsuccessful, try again...");
+				sqlConnection.setFirstLogin(true);
+			}
 		}
 		
+		System.out.println("Thanks for using our application.");
 	}
-	
 }

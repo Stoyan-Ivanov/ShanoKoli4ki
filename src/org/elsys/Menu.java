@@ -19,7 +19,6 @@ public class Menu {
 		Garage garage = new Garage(conn);
 		Registrations reg = new Registrations(conn);
 		Rentals rent = new Rentals(conn);
-		clearScreen();
 		
 		System.out.println("Choose from these :");
 		System.out.println("------------------\n");
