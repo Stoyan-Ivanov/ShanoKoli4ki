@@ -1,6 +1,7 @@
 package org.elsys;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.Statement;
 import java.util.Scanner;
 
 
@@ -13,21 +14,23 @@ public class MainClass {
 		Connection connection;
 		Scanner a = new Scanner(System.in);
 		
-		System.out.println("Welcome to ShanoKoli4ki & Co.\n"
-				+ "Log in the database and we will setup everything for you!\n"
-				+ "If you want to proceed please press Enter\n"
-				+ "or if you want to exit just type 'Exit'.");
+		System.out.println(" _____ _                       _   __      _ _   ___ _    _ \n"
+				+ "/  ___| |                     | | / /     | (_) /   | |  (_)\n"
+				+ "\\ `--.| |__   __ _ _ __   ___ | |/ /  ___ | |_ / /| | | ___ \n"
+				+ " `--. \\ '_ \\ / _` | '_ \\ / _ \\|    \\ / _ \\| | / /_| | |/ / |\n"
+				+ "/\\__/ / | | | (_| | | | | (_) | |\\  \\ (_) | | \\___  |   <| |\n"
+				+ "\\____/|_| |_|\\__,_|_| |_|\\___/\\_| \\_/\\___/|_|_|   |_/_|\\_\\_|\n");
+		System.out.println("\n\nPress Enter to continue or type 'Exit' to exit");
 		
 		while(!a.nextLine().equals("Exit")) {
 			try {
 				connectionURL = sqlConnection.getURLDetails();
 				connection = DriverManager.getConnection(connectionURL);
-				System.out.println("Connection successful!");
+				System.out.println("Connection to server successful!");
 				sqlConnection.createDatabaseStructure(connection);
-				System.out.println("Database structure added!\n"
-									+ "Loging into the new database...");
-				connection = DriverManager.getConnection(connectionURL);
-				System.out.println("Connected to the new database successfully!");
+		    	connection = DriverManager.getConnection(connectionURL);
+		    	System.out.println("Connected to the database successfully!");
+				
 				new Menu(connection);
 			} catch (Exception e) {
 				System.out.println("Connection unsuccessful, try again...");

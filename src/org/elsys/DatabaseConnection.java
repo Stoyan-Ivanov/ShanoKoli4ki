@@ -59,10 +59,10 @@ public class DatabaseConnection {
 		try {
 			
 			Statement stmt = connection.createStatement();
-			
-		    String sql = "CREATE DATABASE IF NOT EXISTS shanokoli4ki";
+			String sql = "CREATE DATABASE IF NOT EXISTS shanokoli4ki";
 		    
-		    stmt.executeUpdate(sql);
+		    result = stmt.executeUpdate(sql);
+		    System.out.print(result);
 		    
 			sql = "CREATE TABLE IF NOT EXISTS `shanokoli4ki`.`car` ("
 					+ "`RegistrationPlate` VARCHAR(45) NOT NULL UNIQUE,"
