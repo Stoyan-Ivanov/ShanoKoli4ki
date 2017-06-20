@@ -61,8 +61,7 @@ public class DatabaseConnection {
 			Statement stmt = connection.createStatement();
 			String sql = "CREATE DATABASE IF NOT EXISTS shanokoli4ki";
 		    
-		    result = stmt.executeUpdate(sql);
-		    System.out.print(result);
+		    stmt.executeUpdate(sql);
 		    
 			sql = "CREATE TABLE IF NOT EXISTS `shanokoli4ki`.`car` ("
 					+ "`RegistrationPlate` VARCHAR(45) NOT NULL UNIQUE,"
