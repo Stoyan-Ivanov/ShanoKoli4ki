@@ -31,7 +31,7 @@ public class Menu {
 	    System.out.println("6 - Remove a registration");
 	    System.out.println("7 - List of active rentals");
 	    System.out.println("8 - Add a rental");
-	    System.out.println("9 - Remove a renral");
+	    System.out.println("9 - Remove a rental");
 	        
 	    while (true) {
 	    	

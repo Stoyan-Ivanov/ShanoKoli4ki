@@ -152,5 +152,33 @@ public class Rentals {
 	
 	public void removeRental() {
 		
+		System.out.println("Delete a rental");
+		System.out.println("---------------------------\n");
+		
+		System.out.print("Enter an email: ");
+		String email = "'" + scanner.nextLine() + "'";
+		
+		System.out.print("Enter registration plate of he car: ");
+		String regPlate = "'" + scanner.nextLine() + "'";
+		
+		System.out.print("Enter the starting date of the rental: ");
+		String fromDate = "'" + scanner.nextLine() + "'";
+		
+		try {
+			stmt = conn.createStatement();
+			String sql = "DELETE FROM shanokoli4ki.rents WHERE Email = " + email + " AND " + "RegistrationPlate = "
+					+ regPlate + " AND " + "FromDate = " + fromDate;
+				
+			stmt.executeUpdate(sql);
+			
+			System.out.println("\n*Rental successfully deleted!*\n");
+		
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		System.out.println("Press Enter to continue...");
+		scanner.nextLine();
+		
 	}
 }
